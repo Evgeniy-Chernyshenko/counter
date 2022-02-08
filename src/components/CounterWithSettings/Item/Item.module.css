@@ -1,8 +1,16 @@
 .counterItem {
-  width: 400px;
   background-color: #282c34;
   padding: 20px;
   border-radius: 10px;
   display: grid;
   grid-template-rows: 1fr auto;
+  min-height: 272px;
+  width: 420px;
+  min-width: 260px;
+}
+
+@media (max-width: 1000px) {
+  .counterItem {
+    width: auto;
+  }
 }

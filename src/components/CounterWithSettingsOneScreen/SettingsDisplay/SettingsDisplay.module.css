@@ -13,7 +13,8 @@
 .settingsDisplay input {
   font-size: inherit;
   text-align: center;
-  width: 150px;
+  min-width: 100%;
+  max-width: 150px;
   border-radius: 5px;
 }
 

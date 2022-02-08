@@ -1,5 +1,6 @@
-html {
+* {
   font-family: sans-serif;
+  box-sizing: border-box;
 }
 
 html,
@@ -7,4 +8,8 @@ body,
 #root {
   height: 100%;
   margin: 0;
+}
+
+html {
+  min-width: 300px;
 }

@@ -1,5 +1,11 @@
 .counterWithSettings {
   display: grid;
-  grid-template-columns: auto auto;
-  grid-gap: 40px;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 20px;
+}
+
+@media (max-width: 600px) {
+  .counterWithSettings {
+    grid-template-columns: auto;
+  }
 }

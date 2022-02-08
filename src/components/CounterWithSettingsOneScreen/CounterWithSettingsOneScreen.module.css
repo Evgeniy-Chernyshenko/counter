@@ -1,5 +1,0 @@
-.counterWithSettingsOneScreen {
-  display: grid;
-  grid-template-columns: auto auto;
-  grid-gap: 40px;
-}

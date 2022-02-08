@@ -16,28 +16,30 @@ function App() {
     <div className="App">
       <HashRouter>
         <Navigation />
-        <Routes>
-          <Route
-            path={PATH.V1.link}
-            element={<Counter initialCount={0} maxCount={5} />}
-          />
-          <Route
-            path={PATH.V2.link}
-            element={
-              <CounterWithSettings initMaxValue={5} initStartValue={0} />
-            }
-          />
-          <Route
-            path={PATH.V3.link}
-            element={
-              <CounterWithSettingsOneScreen
-                initMaxValue={5}
-                initStartValue={0}
-              />
-            }
-          />
-          <Route path={"*"} element={<Navigate to={PATH.V2.link} />} />
-        </Routes>
+        <div className="contentContainer">
+          <Routes>
+            <Route
+              path={PATH.V1.link}
+              element={<Counter initialCount={0} maxCount={5} />}
+            />
+            <Route
+              path={PATH.V2.link}
+              element={
+                <CounterWithSettings initMaxValue={5} initStartValue={0} />
+              }
+            />
+            <Route
+              path={PATH.V3.link}
+              element={
+                <CounterWithSettingsOneScreen
+                  initMaxValue={5}
+                  initStartValue={0}
+                />
+              }
+            />
+            <Route path={"*"} element={<Navigate to={PATH.V2.link} />} />
+          </Routes>
+        </div>
       </HashRouter>
     </div>
   );

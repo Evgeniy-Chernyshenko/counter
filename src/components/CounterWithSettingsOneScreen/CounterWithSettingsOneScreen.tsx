@@ -3,7 +3,6 @@ import { Button } from "./Button/Button";
 import { CounterDisplay } from "./CounterDisplay/CounterDisplay";
 import { SettingsDisplay } from "./SettingsDisplay/SettingsDisplay";
 import { ChangeEvent, useEffect, useState } from "react";
-import styles from "./CounterWithSettingsOneScreen.module.css";
 
 type CounterWithSettingsPropsType = {
   initMaxValue: number;
@@ -97,7 +96,7 @@ export const CounterWithSettingsOneScreen = (
   };
 
   return (
-    <div className={styles.counterWithSettingsOneScreen}>
+    <div>
       <Item
         display={
           isApplySettings ? (
