@@ -1,0 +1,22 @@
+.settingsDisplay {
+  font-size: 1.5em;
+  display: grid;
+  grid-gap: 20px;
+}
+
+.settingsDisplay label {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-gap: 20px;
+}
+
+.settingsDisplay input {
+  font-size: inherit;
+  text-align: center;
+  width: 150px;
+  border-radius: 5px;
+}
+
+.error {
+  background-color: #ff9393;
+}

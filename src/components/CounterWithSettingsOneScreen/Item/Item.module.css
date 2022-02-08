@@ -1,0 +1,9 @@
+.counterItem {
+  width: 400px;
+  background-color: #282c34;
+  padding: 20px;
+  border-radius: 10px;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  height: 240px;
+}

@@ -1,0 +1,15 @@
+.counter {
+  width: fit-content;
+  background-color: #282c34;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.buttonsContainer {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 20px;
+  border: 2px solid #44bee0;
+  padding: 20px;
+  border-radius: 10px;
+}

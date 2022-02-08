@@ -1,24 +1,44 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Counter } from "./components/Counter/Counter";
+import { CounterWithSettings } from "./components/CounterWithSettings/CounterWithSettings";
+import { CounterWithSettingsOneScreen } from "./components/CounterWithSettingsOneScreen/CounterWithSettingsOneScreen";
+import { HashRouter, Routes, Route, Navigate } from "react-router-dom";
+import { Navigation } from "./components/Navigation/Navigation";
+import "./App.css";
+
+export const PATH = {
+  V1: { link: "/v1", name: "counter v1" },
+  V2: { link: "/v2", name: "counter v2" },
+  V3: { link: "/v3", name: "counter v3" },
+};
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <HashRouter>
+        <Navigation />
+        <Routes>
+          <Route
+            path={PATH.V1.link}
+            element={<Counter initialCount={0} maxCount={5} />}
+          />
+          <Route
+            path={PATH.V2.link}
+            element={
+              <CounterWithSettings initMaxValue={5} initStartValue={0} />
+            }
+          />
+          <Route
+            path={PATH.V3.link}
+            element={
+              <CounterWithSettingsOneScreen
+                initMaxValue={5}
+                initStartValue={0}
+              />
+            }
+          />
+          <Route path={"*"} element={<Navigate to={PATH.V2.link} />} />
+        </Routes>
+      </HashRouter>
     </div>
   );
 }

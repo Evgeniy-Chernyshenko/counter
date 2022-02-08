@@ -1,0 +1,30 @@
+.navigation {
+  padding: 20px 0;
+  background-color: #282c34;
+  width: 100%;
+}
+
+.navigation ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 40px;
+  justify-content: center;
+}
+
+.navigation a {
+  color: #ffffff;
+  font-size: 2em;
+  text-decoration: none;
+  border-bottom: 2px dashed #ffffff;
+}
+
+.navigation .active {
+  color: #44bee0;
+  border-bottom-color: rgba(255, 255, 255, 0);
+}
+
+.navigation a:hover {
+  border-bottom: 2px dashed rgba(255, 255, 255, 0);
+}
