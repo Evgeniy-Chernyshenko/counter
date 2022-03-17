@@ -1,3 +1,4 @@
+import React from 'react';
 import styles from './SettingsDisplay.module.css';
 import {
   setMaxValueCallBackType,
@@ -13,7 +14,7 @@ type SettingsDisplayPropsType = {
   isMaxValueError: boolean;
 };
 
-export const SettingsDisplay = (props: SettingsDisplayPropsType) => {
+export const SettingsDisplay = React.memo((props: SettingsDisplayPropsType) => {
   console.log('render SettingsDisplay');
 
   return (
@@ -38,4 +39,4 @@ export const SettingsDisplay = (props: SettingsDisplayPropsType) => {
       </label>
     </div>
   );
-};
+});

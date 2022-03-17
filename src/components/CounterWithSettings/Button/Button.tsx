@@ -1,3 +1,4 @@
+import React from 'react';
 import styles from './Button.module.css';
 
 type DefaultButtonPropsType = React.DetailedHTMLProps<
@@ -5,10 +6,14 @@ type DefaultButtonPropsType = React.DetailedHTMLProps<
   HTMLButtonElement
 >;
 
-export const Button = ({ className, ...restProps }: DefaultButtonPropsType) => {
-  console.log('render Button');
+export const Button = React.memo(
+  ({ className, ...restProps }: DefaultButtonPropsType) => {
+    console.log('render Button');
 
-  const finalClassName = `${styles.default}${className ? ' ' + className : ''}`;
+    const finalClassName = `${styles.default}${
+      className ? ' ' + className : ''
+    }`;
 
-  return <button className={finalClassName} {...restProps} />;
-};
+    return <button className={finalClassName} {...restProps} />;
+  }
+);

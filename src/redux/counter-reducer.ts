@@ -35,9 +35,11 @@ export const counterReducer = (
 
       const newCurrentValue = state.currentValue + 1;
 
-      return newCurrentValue >= state.maxValue
-        ? { ...state, isLimitExceeded: true }
-        : { ...state, currentValue: newCurrentValue };
+      return {
+        ...state,
+        currentValue: newCurrentValue,
+        ...(newCurrentValue >= state.maxValue && { isLimitExceeded: true }),
+      };
     }
 
     case 'RESET_CURRENT_VALUE': {

@@ -1,3 +1,4 @@
+import React from 'react';
 import styles from './CounterDisplay.module.css';
 
 type CounterDisplayPropsType = {
@@ -7,7 +8,7 @@ type CounterDisplayPropsType = {
   hasErrors: boolean;
 };
 
-export const CounterDisplay = (props: CounterDisplayPropsType) => {
+export const CounterDisplay = React.memo((props: CounterDisplayPropsType) => {
   console.log('render CounterDisplay');
 
   return (
@@ -31,4 +32,4 @@ export const CounterDisplay = (props: CounterDisplayPropsType) => {
         ))}
     </div>
   );
-};
+});

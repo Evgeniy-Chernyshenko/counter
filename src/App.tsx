@@ -31,7 +31,7 @@ function App() {
               path={PATH.V3.link}
               element={
                 <CounterWithSettings
-                  isOneDisplay
+                  oneDisplay
                   initMaxValue={5}
                   initStartValue={0}
                 />
