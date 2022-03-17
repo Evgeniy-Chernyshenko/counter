@@ -11,6 +11,6 @@
 
 @media (max-width: 1000px) {
   .counterItem {
-    width: auto;
+    width: 100%;
   }
 }

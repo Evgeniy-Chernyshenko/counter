@@ -1,11 +1,15 @@
-import { Item } from "./Item/Item";
-import { Button } from "./Button/Button";
-import { CounterDisplay } from "./CounterDisplay/CounterDisplay";
-import { SettingsDisplay } from "./SettingsDisplay/SettingsDisplay";
-import { ChangeEvent, useEffect, useState } from "react";
-import styles from "./CounterWithSettings.module.css";
+import { Item } from './Item/Item';
+import { Button } from './Button/Button';
+import { CounterDisplay } from './CounterDisplay/CounterDisplay';
+import { SettingsDisplay } from './SettingsDisplay/SettingsDisplay';
+import { ChangeEvent, useEffect, useState } from 'react';
+import styles from './CounterWithSettings.module.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootStateType } from '../../redux/store';
+import { counterAC, CounterStateType } from '../../redux/counter-reducer';
 
 type CounterWithSettingsPropsType = {
+  isOneDisplay?: boolean;
   initMaxValue: number;
   initStartValue: number;
 };
@@ -19,117 +23,105 @@ export type setMaxValueCallBackType = (
 ) => void;
 
 export const CounterWithSettings = (props: CounterWithSettingsPropsType) => {
-  const [startValue, setStartValue] = useState<number>(props.initStartValue);
-  const [maxValue, setMaxValue] = useState<number>(props.initMaxValue);
-  const [currentValue, setCurrentValue] = useState<number>(
-    props.initStartValue
+  const isOneDisplay = !!props.isOneDisplay;
+
+  const state = useSelector<RootStateType, CounterStateType>(
+    (state) => state.counterReducer
   );
-  const [isApplySettings, setIsApplySetting] = useState<boolean>(true);
-
-  useEffect(() => {
-    const values = localStorage.getItem("values");
-
-    if (!values) {
-      return;
-    }
-
-    const parsedValues = JSON.parse(values);
-
-    setStartValue(parsedValues.startValue);
-    setMaxValue(parsedValues.maxValue);
-    setCurrentValue(parsedValues.currentValue);
-    setIsApplySetting(parsedValues.isApplySettings);
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem(
-      "values",
-      JSON.stringify({ startValue, maxValue, currentValue, isApplySettings })
-    );
-  }, [startValue, maxValue, currentValue, isApplySettings]);
-
-  const isLimitExceeded = currentValue >= maxValue;
-
-  const isStartValueError = startValue < 0 || startValue >= maxValue;
-  const isMaxValueError = maxValue <= 0 || maxValue <= startValue;
-  const hasErrors = isStartValueError || isMaxValueError;
+  const dispatch = useDispatch();
 
   const setStartValueCallBack: setStartValueCallBackType = (e) => {
-    setStartValue(+e.currentTarget.value);
-    setIsApplySetting(false);
+    dispatch(counterAC.setStartValue(+e.currentTarget.value));
   };
 
   const setMaxValueCallBack: setMaxValueCallBackType = (e) => {
-    setMaxValue(+e.currentTarget.value);
-    setIsApplySetting(false);
+    dispatch(counterAC.setMaxValue(+e.currentTarget.value));
   };
 
   const incClickHandler = () => {
-    if (isLimitExceeded) {
-      return;
-    }
-
-    setCurrentValue(currentValue + 1);
+    dispatch(counterAC.incrementCurrentValue());
   };
 
   const resetClickHandler = () => {
-    setCurrentValue(startValue);
+    dispatch(counterAC.resetCurrentValue());
   };
 
   const setClickHandler = () => {
-    if (hasErrors) {
-      return;
-    }
+    !state.hasErrors && dispatch(counterAC.setIsApplySettings(true));
+  };
 
-    setCurrentValue(startValue);
-    setIsApplySetting(true);
+  const settingsClickHandler = () => {
+    dispatch(counterAC.setIsApplySettings(false));
   };
 
   return (
-    <div className={styles.counterWithSettings}>
-      <Item
-        display={
-          <SettingsDisplay
-            startValue={startValue}
-            maxValue={maxValue}
-            setStartValueCallBack={setStartValueCallBack}
-            setMaxValueCallBack={setMaxValueCallBack}
-            isStartValueError={isStartValueError}
-            isMaxValueError={isMaxValueError}
-          />
-        }
-        buttons={
-          <Button
-            disabled={isApplySettings || hasErrors}
-            onClick={setClickHandler}
-          >
-            set
-          </Button>
-        }
-      />
-      <Item
-        display={
-          <CounterDisplay
-            currentValue={currentValue}
-            isLimitExceeded={isLimitExceeded}
-            isApplySettings={isApplySettings}
-            hasErrors={hasErrors}
-          />
-        }
-        buttons={
-          <>
+    <div
+      className={`${styles.counterWithSettings}${
+        isOneDisplay ? ' ' + styles.oneDisplay : ''
+      }`}
+    >
+      {((isOneDisplay && state.isApplySettings) || !isOneDisplay) && (
+        <Item
+          display={
+            <CounterDisplay
+              currentValue={state.currentValue}
+              isLimitExceeded={state.isLimitExceeded}
+              isApplySettings={state.isApplySettings}
+              hasErrors={state.hasErrors}
+            />
+          }
+          buttons={
+            <>
+              <Button
+                disabled={state.isLimitExceeded || !state.isApplySettings}
+                onClick={incClickHandler}
+              >
+                inc
+              </Button>
+              <Button
+                disabled={
+                  !state.isApplySettings ||
+                  state.currentValue === state.startValue
+                }
+                onClick={resetClickHandler}
+              >
+                reset
+              </Button>
+              {isOneDisplay && (
+                <Button
+                  disabled={!state.isApplySettings}
+                  onClick={settingsClickHandler}
+                >
+                  settings
+                </Button>
+              )}
+            </>
+          }
+        />
+      )}
+
+      {((isOneDisplay && !state.isApplySettings) || !isOneDisplay) && (
+        <Item
+          display={
+            <SettingsDisplay
+              startValue={state.startValue}
+              maxValue={state.maxValue}
+              setStartValueCallBack={setStartValueCallBack}
+              setMaxValueCallBack={setMaxValueCallBack}
+              isStartValueError={state.isStartValueError}
+              isMaxValueError={state.isMaxValueError}
+            />
+          }
+          buttons={
             <Button
-              disabled={isLimitExceeded || !isApplySettings}
-              onClick={incClickHandler}
+              disabled={state.isApplySettings || state.hasErrors}
+              onClick={setClickHandler}
             >
-              inc
+              set
             </Button>
-            <Button disabled={!isApplySettings} onClick={resetClickHandler}>
-              reset
-            </Button>
-          </>
-        }
-      />
+          }
+        />
+      )}
     </div>
   );
 };

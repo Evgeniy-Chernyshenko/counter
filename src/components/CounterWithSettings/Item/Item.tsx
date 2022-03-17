@@ -1,7 +1,6 @@
-import React from "react";
-import { Display } from "./Display/Display";
-import { Buttons } from "./Buttons/Buttons";
-import styles from "./Item.module.css";
+import { Display } from './Display/Display';
+import { Buttons } from './Buttons/Buttons';
+import styles from './Item.module.css';
 
 type CounterItemPropsType = {
   display: React.ReactNode;
@@ -9,6 +8,8 @@ type CounterItemPropsType = {
 };
 
 export const Item = (props: CounterItemPropsType) => {
+  console.log('render Item');
+
   return (
     <div className={styles.counterItem}>
       <Display content={props.display} />

@@ -1,4 +1,4 @@
-import styles from "./CounterDisplay.module.css";
+import styles from './CounterDisplay.module.css';
 
 type CounterDisplayPropsType = {
   currentValue: number;
@@ -8,12 +8,14 @@ type CounterDisplayPropsType = {
 };
 
 export const CounterDisplay = (props: CounterDisplayPropsType) => {
+  console.log('render CounterDisplay');
+
   return (
     <div className={styles.counterDisplay}>
       {props.isApplySettings && (
         <span
           className={`${styles.counter}${
-            props.isLimitExceeded ? " " + styles.redText : ""
+            props.isLimitExceeded ? ' ' + styles.redText : ''
           }`}
         >
           {props.currentValue}

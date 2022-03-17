@@ -4,6 +4,10 @@
   grid-gap: 20px;
 }
 
+.oneDisplay {
+  grid-template-columns: auto;
+}
+
 @media (max-width: 600px) {
   .counterWithSettings {
     grid-template-columns: auto;

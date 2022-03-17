@@ -1,8 +1,8 @@
-import styles from "./SettingsDisplay.module.css";
+import styles from './SettingsDisplay.module.css';
 import {
   setMaxValueCallBackType,
   setStartValueCallBackType,
-} from "../CounterWithSettings";
+} from '../CounterWithSettings';
 
 type SettingsDisplayPropsType = {
   startValue: number;
@@ -14,21 +14,23 @@ type SettingsDisplayPropsType = {
 };
 
 export const SettingsDisplay = (props: SettingsDisplayPropsType) => {
+  console.log('render SettingsDisplay');
+
   return (
     <div className={styles.settingsDisplay}>
       <label>
-        max value:{" "}
+        max value:{' '}
         <input
-          className={props.isMaxValueError ? styles.error : ""}
+          className={props.isMaxValueError ? styles.error : ''}
           type="number"
           value={props.maxValue}
           onChange={props.setMaxValueCallBack}
         />
       </label>
       <label>
-        start value:{" "}
+        start value:{' '}
         <input
-          className={props.isStartValueError ? styles.error : ""}
+          className={props.isStartValueError ? styles.error : ''}
           type="number"
           value={props.startValue}
           onChange={props.setStartValueCallBack}

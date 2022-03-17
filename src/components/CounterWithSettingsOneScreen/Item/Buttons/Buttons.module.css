@@ -1,9 +1,0 @@
-.buttons {
-  border: 2px solid #44bee0;
-  padding: 20px;
-  border-radius: 10px;
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  flex-wrap: wrap;
-}
