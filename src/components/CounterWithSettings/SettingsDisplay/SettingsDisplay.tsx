@@ -4,6 +4,7 @@ import {
   setMaxValueCallBackType,
   setStartValueCallBackType,
 } from '../CounterWithSettings';
+import { Input } from '../Input/Input';
 
 type SettingsDisplayPropsType = {
   startValue: number;
@@ -21,20 +22,20 @@ export const SettingsDisplay = React.memo((props: SettingsDisplayPropsType) => {
     <div className={styles.settingsDisplay}>
       <label>
         max value:{' '}
-        <input
-          className={props.isMaxValueError ? styles.error : ''}
+        <Input
           type="number"
           value={props.maxValue}
           onChange={props.setMaxValueCallBack}
+          hasError={props.isStartValueError}
         />
       </label>
       <label>
         start value:{' '}
-        <input
-          className={props.isStartValueError ? styles.error : ''}
+        <Input
           type="number"
           value={props.startValue}
           onChange={props.setStartValueCallBack}
+          hasError={props.isStartValueError}
         />
       </label>
     </div>

@@ -1,0 +1,11 @@
+.default {
+  font-size: inherit;
+  text-align: center;
+  min-width: 100%;
+  max-width: 150px;
+  border-radius: 5px;
+}
+
+.error {
+  background-color: #ff9393;
+}

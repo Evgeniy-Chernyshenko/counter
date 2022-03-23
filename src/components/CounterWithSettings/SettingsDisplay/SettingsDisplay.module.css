@@ -9,15 +9,3 @@
   grid-template-columns: 1fr auto;
   grid-gap: 20px;
 }
-
-.settingsDisplay input {
-  font-size: inherit;
-  text-align: center;
-  min-width: 100%;
-  max-width: 150px;
-  border-radius: 5px;
-}
-
-.error {
-  background-color: #ff9393;
-}
